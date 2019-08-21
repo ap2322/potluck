@@ -8,5 +8,11 @@ class Potluck
 
   def add_dish(dish)
     @dishes << dish
-  end 
+  end
+
+  def get_all_from_category(category)
+    @dishes.select do |dish|
+      dish.category == category
+    end 
+  end
 end
