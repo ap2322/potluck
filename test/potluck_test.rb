@@ -61,4 +61,16 @@ class PotluckTest < Minitest::Test
     assert_equal ["Cocktail Meatballs", "Roast Pork"], @potluck.menu[:entrees]
 
   end
+
+  def test_add_dishes_to_menu_helper_function
+    add_dishes_to_setup
+
+    assert_equal [@couscous_salad, @summer_pizza], @potluck.menu[:appetizers]
+  end
+
+  def test_unique_categories_array
+    add_dishes_to_setup
+
+    assert_equal [:appetizer, :entre, :dessert], @potluck.all_categories_of_dishes
+  end
 end
