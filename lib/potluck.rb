@@ -5,9 +5,9 @@ class Potluck
     @date = date
     @dishes = dishes
     @menu = {
-      appetizers: [],
-      entrees: [],
-      desserts: [],
+      appetizer: [],
+      entre: [],
+      dessert: [],
     }
   end
 
@@ -21,11 +21,17 @@ class Potluck
     end
   end
 
+  def get_names_in_cat(category)
+    get_all_from_category(category).map do |dish|
+      dish.name
+    end
+  end
+
   def menu
     # self.add_appetizers_to_menu
     # self.add_entrees_to_menu
     # self.add_desserts_to_menu
-    self.add_dishes_to_menu
+    add_dishes_to_menu
     @menu
   end
 
@@ -37,13 +43,13 @@ class Potluck
   end
 
   def add_dishes_to_menu
-    self.all_categories_of_dishes.each do |category|
-      @menu[key] = self.get_all_from_category(category)
-      @menu[key].map do |dish|
-        dish.name
+    # binding.pry
+      @menu.each do |menu_category, value|
+        value << get_names_in_cat(menu_category)
+        value.flatten!
       end
-    end
   end
+
   # def add_appetizers_to_menu
   #   @menu[:appetizers] = get_all_from_category(:appetizer).map do |dish|
   #     dish.name

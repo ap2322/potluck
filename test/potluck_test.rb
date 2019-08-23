@@ -2,6 +2,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/dish'
 require './lib/potluck'
+require 'pry'
 
 class PotluckTest < Minitest::Test
 
@@ -45,20 +46,21 @@ class PotluckTest < Minitest::Test
   def test_get_dish_from_category
     add_dishes_to_setup
 
-    assert_equal [@couscous_salad, @summer_pizza], @potluck.get_all_from_category(:appetizer)
+    assert_equal ["Couscous Salad", "Summer Pizza"], @potluck.get_all_from_category(:appetizer)
     assert_equal @couscous_salad, @potluck.get_all_from_category(:appetizer).first
     assert_equal "Couscous Salad", @potluck.get_all_from_category(:appetizer).first.name
   end
 
-  def test_menu
+  def test_add_dishes_to_menu
     add_dishes_to_setup
     bean_dip = Dish.new("Bean Dip", :appetizer)
     @potluck.add_dish(bean_dip)
 
     assert_instance_of Hash, @potluck.menu
-    assert_equal [:appetizers, :entrees, :desserts], @potluck.menu.keys
-    assert_equal ["Bean Dip", "Couscous Salad", "Summer Pizza"], @potluck.menu[:appetizers]
-    assert_equal ["Cocktail Meatballs", "Roast Pork"], @potluck.menu[:entrees]
+    assert_equal [:appetizer, :entre, :dessert], @potluck.menu.keys
+    # binding.pry
+    assert_equal ["Bean Dip", "Couscous Salad", "Summer Pizza"], @potluck.menu[:appetizer]
+    assert_equal ["Cocktail Meatballs", "Roast Pork"], @potluck.menu[:entre]
 
   end
 
